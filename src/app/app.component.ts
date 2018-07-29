@@ -5,6 +5,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { EquiposComponent } from '../pages/equipos/equipos';
+import { MiembrosEquiposComponent } from '../pages/miembros-equipos/miembros-equipos';
+import { PuntuacionesComponent } from '../pages/puntuaciones/puntuaciones';
+import { VerpuntuacionesComponent } from '../pages/verpuntuaciones/verpuntuaciones';
 
 @Component({
   templateUrl: 'app.html'
@@ -21,8 +25,14 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+
+      { title: 'Torneos', component: HomePage },
+      { title: 'Capturar puntuacion', component: PuntuacionesComponent },
+      { title: 'Ver puntuaciones', component: VerpuntuacionesComponent },
+      { title: 'MVP', component: ListPage },
+      { title: 'Equipos', component: EquiposComponent },
+      { title: 'Miembros', component: MiembrosEquiposComponent }
+
     ];
 
   }
