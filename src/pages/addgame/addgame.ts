@@ -55,7 +55,7 @@ export class AddgamePage {
 
   showPrompt() {
     const prompt = this.alertCtrl.create({
-      title: 'Decea guardar el juego?',
+      title: 'Desea guardar el juego?',
       buttons: [
         {
           text: 'Cancelar',

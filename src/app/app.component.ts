@@ -3,7 +3,7 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-// import { HomePage } from '../pages/home/home';
+import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 // import { EquiposPage } from '../pages/equipos/equipos';
 // import { MiembrosEquiposComponent } from '../pages/miembros-equipos/miembros-equipos';
@@ -21,7 +21,8 @@ export class MyApp {
   public paginas = [
     JuegosPage,
     GoleadoresPage,
-    TeamsPage
+    TeamsPage,
+    HomePage
   ];
 
   //rootPage: any = JuegosPage;
