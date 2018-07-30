@@ -17,6 +17,19 @@ import { TeamsPage } from '../pages/teams/teams';
 import { GoleadoresPage } from '../pages/goleadores/goleadores';
 import { AddgamePage } from '../pages/addgame/addgame';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { FirebaseproviderProvider } from '../providers/firebaseprovider/firebaseprovider';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyAQPGUAYsGk3SdTkE3IkRiheOVmWckoQVw",
+  authDomain: "sportregister-2d7d7.firebaseapp.com",
+  databaseURL: "https://sportregister-2d7d7.firebaseio.com",
+  projectId: "sportregister-2d7d7",
+  storageBucket: "sportregister-2d7d7.appspot.com",
+  messagingSenderId: "1026356509067"
+};
 
 @NgModule({
   declarations: [
@@ -34,6 +47,9 @@ import { AddgamePage } from '../pages/addgame/addgame';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -51,7 +67,9 @@ import { AddgamePage } from '../pages/addgame/addgame';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    AngularFireDatabase,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    FirebaseproviderProvider
   ]
 })
 export class AppModule {}

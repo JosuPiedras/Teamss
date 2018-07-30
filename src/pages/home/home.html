@@ -9,17 +9,11 @@
 
 <ion-content padding>
 
-<ion-card>
+<ion-card *ngFor="let torneo of torneos | async">
     <ion-card-content>
-      <ion-card-title>
-        TorneoMamalon
-      </ion-card-title>
-       <p>
-        Organizador:
-      </p>
-      <p>
-      El pinchi cholo
-      </p>
+      <ion-card-title>{{torneo.Nombre}}</ion-card-title>
+       <p>Organizador:</p>
+      <p>{{torneo.Organizador}}</p>
     </ion-card-content>
 
     <ion-row no-padding>
@@ -37,35 +31,7 @@
 
   </ion-card>
 
-  <ion-card>
-    <ion-card-content>
-      <ion-card-title>
-        TorneoMamalonOtraVez
-      </ion-card-title>
-       <p>
-        Organizador:
-      </p>
-      <p>
-      Asrim69
-      </p>
-    </ion-card-content>
-
-    <ion-row no-padding>
-
-      <ion-col text-center>
-
-      </ion-col>
-      <ion-col text-right>
-        <button ion-button clear small color="secondary" icon-start>
-          <ion-icon name='football'></ion-icon>
-          Seleccionar Torneo
-        </button>
-      </ion-col>
-    </ion-row>
-
-  </ion-card>
-
-    <button ion-button color="secondary" small item-end (click)="goToOtherPage()">
+    <button ion-button color="secondary" small item-end (click)="showPrompt()">
       Agregar torneo
     </button>
 
