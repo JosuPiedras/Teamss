@@ -3,37 +3,45 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
+// import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
-import { EquiposComponent } from '../pages/equipos/equipos';
-import { MiembrosEquiposComponent } from '../pages/miembros-equipos/miembros-equipos';
-import { PuntuacionesComponent } from '../pages/puntuaciones/puntuaciones';
-import { VerpuntuacionesComponent } from '../pages/verpuntuaciones/verpuntuaciones';
-
+// import { EquiposPage } from '../pages/equipos/equipos';
+// import { MiembrosEquiposComponent } from '../pages/miembros-equipos/miembros-equipos';
+// import { PuntuacionesComponent } from '../pages/puntuaciones/puntuaciones';
+// import { VerpuntuacionesComponent } from '../pages/verpuntuaciones/verpuntuaciones';
+import { JuegosPage } from '../pages/juegos/juegos';
+import { TeamsPage } from '../pages/teams/teams';
+import { GoleadoresPage } from '../pages/goleadores/goleadores';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
+  //rootPage: any = TabsPage;
+  public paginas = [
+    JuegosPage,
+    GoleadoresPage,
+    TeamsPage
+  ];
 
-  rootPage: any = HomePage;
+  //rootPage: any = JuegosPage;
 
-  pages: Array<{title: string, component: any}>;
+  //pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
-    this.pages = [
+    //this.pages = [
 
-      { title: 'Torneos', component: HomePage },
-      { title: 'Capturar puntuacion', component: PuntuacionesComponent },
-      { title: 'Ver puntuaciones', component: VerpuntuacionesComponent },
-      { title: 'MVP', component: ListPage },
-      { title: 'Equipos', component: EquiposComponent },
-      { title: 'Miembros', component: MiembrosEquiposComponent }
+    //  { title: 'Torneos', component: HomePage },
+    //  { title: 'Capturar puntuacion', component: PuntuacionesComponent },
+    //  { title: 'Ver puntuaciones', component: VerpuntuacionesComponent },
+    //  { title: 'MVP', component: ListPage },
+    //  { title: 'Equipos', component: EquiposComponent },
+    //  { title: 'Miembros', component: MiembrosEquiposComponent }
 
-    ];
+    //];
 
   }
 

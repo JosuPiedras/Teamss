@@ -1,43 +1,49 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ListPage } from '../list/list'
 import { AlertController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 
+/**
+ * Generated class for the TeamsPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+
+@IonicPage()
 @Component({
-  selector: 'page-list',
-  templateUrl: 'list.html'
+  selector: 'page-teams',
+  templateUrl: 'teams.html',
 })
-export class ListPage {
-  selectedItem: any;
-  public team = null;
-  public players = [];
+export class TeamsPage {
+  public teams = [];
   constructor(public toastCtrl: ToastController, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
-    // If we navigated to this page, we will have an item available as a nav param
-    this.team = {
-      name:'DTD',
-      partidos: 4,
-      ganados: 2,
-      empatados: 1,
-      perdidos: 1,
-      favor: 7,
-      contra: 4,
-      points: 9
-    };
-    this.players = [
-      {name:"Josu", Goles:3},
-      { name: "MegaBlaziken", Goles: 2 },
-      { name: "Perrengiel", Goles: 2 },
-    ];
+    this.teams = [
+      { name: "DTD", points: 5 },
+      { name: "Compas", points: 6 },
+      { name: "XD", points: 4 }
+    ]
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad TeamsPage');
+  }
+
+  goToOtherPage() {
+    //push another page onto the history stack
+    //causing the nav controller to animate the new page in
+    this.navCtrl.push(ListPage);
   }
 
   showPrompt() {
     const prompt = this.alertCtrl.create({
-      title: 'Nuevo jugador',
-      message: "Ingrese el nombre del jugador:",
+      title: 'Nuevo equipo',
+      message: "Ingrese el nombre del equipo:",
       inputs: [
         {
           name: 'Nombre',
-          placeholder: 'ej. Juan Camaney'
+          placeholder: 'ej. Los Chidoris'
         },
       ],
       buttons: [
@@ -54,7 +60,7 @@ export class ListPage {
             console.log(JSON.stringify(data)); //to see the object
             console.log(data.Nombre);
             const toast = this.toastCtrl.create({
-              message: 'Jugador guardado!',
+              message: 'Equipo guardado!',
               duration: 3000
             });
             toast.present();
@@ -64,4 +70,5 @@ export class ListPage {
     });
     prompt.present();
   }
+
 }

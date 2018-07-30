@@ -3,28 +3,58 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>MVP</ion-title>
+    <ion-title>Detalle</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
- <ion-grid>
-    <ion-row>
-      <ion-col>
-        <div class="centrado">Mejor Goleador</div>
-      </ion-col>
-      <ion-col>
-        <div class="centrado">Goles</div>
-      </ion-col>
-    </ion-row>
-        <ion-row>
-      <ion-col>
-        <div class="centrado">Jose Juan</div>
-      </ion-col>
-      <ion-col>
-        <div class="centrado">420</div>
-      </ion-col>
-    </ion-row>
+<ion-card>
+  <ion-item>
+    <ion-icon name="football" item-start large></ion-icon>
+    <h2>{{team.name}}</h2>
+  </ion-item>
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6><h3>Goles:</h3></ion-col>
+        <ion-col col-6><p>A favor: {{team.favor}}</p></ion-col>
+        <ion-col offset-6 col-12><p>En contra: {{team.contra}}</p></ion-col>
+        <ion-col offset-6 col-12><p>Diferencia: {{team.favor - team.contra}}</p></ion-col>
+      </ion-row>
+    </ion-grid>
 
-  </ion-grid>
+    <!-- <h3>Goles:</h3>
+    <p>A favor: {{team.favor}}</p>
+    <p>En contra: {{team.contra}}</p>
+    <p>Diferencia: {{team.favor - team.contra}}</p> -->
+  </ion-item>
+  <ion-item>
+    <span item-start>Partidos:</span>
+    <span style="color:green;" item-end>{{team.ganados}}</span>
+    <span style="color:gray;" item-end>{{team.empatados}}</span>
+    <span style="color:red;" item-end>{{team.perdidos}}</span>
+    <button style="color:darkgoldenrod;" ion-button icon-start clear item-end>
+      <ion-icon name="star"></ion-icon>
+      {{team.points}}
+    </button>
+  </ion-item>
+</ion-card>
+<ion-grid>
+  <ion-row>
+    <ion-col col-6>
+      <h3>Jugadores</h3>
+    </ion-col>
+    <ion-col style="text-align: right;" col-6>
+      <button (click)="showPrompt()" ion-button color="secondary" item-end>Agregar</button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-list>
+  <ion-item *ngFor="let player of players">
+    <ion-icon name="person" item-start large></ion-icon>
+    <h2>{{player.name}}</h2>
+    <p>Goles: {{player.Goles}}</p>
+  </ion-item>
+</ion-list>
+
 </ion-content>

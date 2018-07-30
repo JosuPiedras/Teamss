@@ -1,0 +1,41 @@
+<!--
+  Generated template for the TeamsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>teams</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6 style="flex-direction: column;justify-content:flex-end;display: flex;">
+        <h3>Equipos</h3>
+      </ion-col>
+      <ion-col style="text-align: right;" col-6>
+        <button (click)="showPrompt()" ion-button color="secondary" small item-end>Agregar</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list>
+    <ion-item *ngFor="let team of teams;">
+      <ion-icon name="people" item-start large></ion-icon>
+      
+      <h2>{{team.name}}</h2>
+      <p>Puntos: {{team.points}}</p>
+      <button clear item-end (click)="goToOtherPage()"><h2>
+        <ion-icon name="play"></ion-icon>
+      </h2>
+    </button>
+      
+    </ion-item>
+  </ion-list>
+</ion-content>

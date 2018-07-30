@@ -5,7 +5,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
-import { EquiposComponent } from '../pages/equipos/equipos';
 import { MiembrosEquiposComponent } from '../pages/miembros-equipos/miembros-equipos';
 import { PuntuacionesComponent } from '../pages/puntuaciones/puntuaciones';
 import { VerpuntuacionesComponent } from '../pages/verpuntuaciones/verpuntuaciones';
@@ -13,15 +12,24 @@ import { VerpuntuacionesComponent } from '../pages/verpuntuaciones/verpuntuacion
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { JuegosPage } from '../pages/juegos/juegos';
+import { TeamsPage } from '../pages/teams/teams';
+import { GoleadoresPage } from '../pages/goleadores/goleadores';
+import { AddgamePage } from '../pages/addgame/addgame';
+
+
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    EquiposComponent,
     MiembrosEquiposComponent,
     PuntuacionesComponent,
     VerpuntuacionesComponent,
-    ListPage
+    ListPage,
+    JuegosPage,
+    TeamsPage,
+    GoleadoresPage,
+    AddgamePage
   ],
   imports: [
     BrowserModule,
@@ -31,11 +39,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   entryComponents: [
     MyApp,
     HomePage,
-    EquiposComponent,
     MiembrosEquiposComponent,
     PuntuacionesComponent,
     VerpuntuacionesComponent,
-    ListPage
+    ListPage,
+    JuegosPage,
+    TeamsPage,
+    GoleadoresPage,
+    AddgamePage
   ],
   providers: [
     StatusBar,
