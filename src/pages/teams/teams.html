@@ -26,12 +26,12 @@
   </ion-grid>
 
   <ion-list>
-    <ion-item *ngFor="let team of teams;">
+    <ion-item *ngFor="let team of teams | async">
       <ion-icon name="people" item-start large></ion-icon>
       
-      <h2>{{team.name}}</h2>
+      <h2>{{team.Name}}</h2>
       <p>Puntos: {{team.points}}</p>
-      <button clear item-end (click)="goToOtherPage()"><h2>
+      <button clear item-end (click)="goToOtherPage(team.Name)"><h2>
         <ion-icon name="play"></ion-icon>
       </h2>
     </button>

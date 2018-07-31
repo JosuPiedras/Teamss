@@ -3,15 +3,14 @@ import { AngularFireDatabase } from 'angularfire2/database';
 
 @Injectable()
 export class FirebaseproviderProvider {
+  public torneo:any;
+  public team:any;
 
   constructor(private afDB: AngularFireDatabase) {
-    // this.items = afDB.list('asistencia');
-    // // this.items.subscribe(z => {
-    //   this.gaming = z[z.length - 1].fecha;
-    //   this.change_list(this.gaming);
-    // })
-    //const items = af.database.list('items');
-    //items.push('new item');
+    this.torneo = null;
+  }
+  seleccionar_torneo(data){
+    this.torneo = data;
   }
 
   crear_torneo(data){
@@ -21,7 +20,43 @@ export class FirebaseproviderProvider {
 
   obtener_torneos(){
     const items = this.afDB.list('torneos');
-    console.log('fork')
+    return items;
+  }
+
+  obtener_equipos(){
+    console.log(this.torneo)
+    const items = this.afDB.list('equipos', ref => ref.orderByChild('torneo').equalTo(this.torneo));
+    return items;
+  }
+
+  crear_equipo(data){
+    const items = this.afDB.list('equipos');
+    items.push(data);
+  }
+
+  seleccionar_equipo(data){
+    this.team = data;
+  }
+
+  detalle_team(){
+
+  }
+
+  obtener_jugadores(data=false) {
+    if (data){
+      return this.afDB.list('jugadores', ref => ref.orderByChild('team').equalTo(data));
+    }else{
+      return this.afDB.list('jugadores', ref => ref.orderByChild('team').equalTo(this.team));
+    }
+  }
+
+  crear_jugador(data){
+    const items = this.afDB.list('jugadores');
+    items.push(data);
+  }
+
+  obtener_juegos(){
+    const items = this.afDB.list('juegos', ref => ref.orderByChild('torneo').equalTo(this.torneo));
     return items;
   }
 

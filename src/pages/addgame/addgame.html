@@ -16,21 +16,21 @@
 <ion-content padding>
   <ion-item>
     <ion-label>Equipo local</ion-label>
-    <ion-select [(ngModel)]="team1">
-      <ion-option *ngFor="let team of teams;" value="{{team.name}}">{{team.name}}</ion-option>
+    <ion-select [(ngModel)]="team1" (ionChange)="t1select()">
+      <ion-option *ngFor="let team of teams | async" value="{{team.Name}}">{{team.Name}}</ion-option>
     </ion-select>
   </ion-item>
   <ion-item>
     <ion-label>Equipo visitante</ion-label>
-    <ion-select [(ngModel)]="team2">
-      <ion-option *ngFor="let team of teams;" value="{{team.name}}">{{team.name}}</ion-option>
+    <ion-select [(ngModel)]="team2" (ionChange)="t2select()">
+      <ion-option *ngFor="let team of teams | async" value="{{team.Name}}">{{team.Name}}</ion-option>
     </ion-select>
   </ion-item>
   <ion-item><ion-label style="text-align: center;">Goleadores - equipo local</ion-label></ion-item>
   <ion-item>
     <ion-label>Agregar</ion-label>
     <ion-select multiple="true" [(ngModel)]="filter1">
-      <ion-option *ngFor="let team of players1;" value="{{team.name}}">{{team.name}}</ion-option>
+      <ion-option *ngFor="let team of players1 | async" value="{{team.name}}">{{team.name}}</ion-option>
     </ion-select>
   </ion-item>
   <ion-item>
@@ -39,7 +39,7 @@
   <ion-item>
     <ion-label>Agregar</ion-label>
     <ion-select multiple="true" [(ngModel)]="filter2">
-      <ion-option *ngFor="let team of players2;" value="{{team.name}}">{{team.name}}</ion-option>
+      <ion-option *ngFor="let team of players2 | async" value="{{team.name}}">{{team.name}}</ion-option>
     </ion-select>
   </ion-item>
   <ion-item-group>

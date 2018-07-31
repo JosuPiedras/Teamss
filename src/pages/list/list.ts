@@ -3,6 +3,9 @@ import { NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 
+import { FirebaseproviderProvider } from '../../providers/firebaseprovider/firebaseprovider'
+import { Observable } from 'rxjs/Observable';
+
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
@@ -10,24 +13,20 @@ import { ToastController } from 'ionic-angular';
 export class ListPage {
   selectedItem: any;
   public team = null;
-  public players = [];
-  constructor(public toastCtrl: ToastController, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
+  public players: Observable<any[]>;
+  constructor(public fbp: FirebaseproviderProvider, public toastCtrl: ToastController, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
     // If we navigated to this page, we will have an item available as a nav param
     this.team = {
-      name:'DTD',
-      partidos: 4,
-      ganados: 2,
-      empatados: 1,
-      perdidos: 1,
-      favor: 7,
-      contra: 4,
-      points: 9
+      name:fbp.team,
+      partidos: 0,
+      ganados: 0,
+      empatados: 0,
+      perdidos: 0,
+      favor: 0,
+      contra: 0,
+      points: 0
     };
-    this.players = [
-      {name:"Josu", Goles:3},
-      { name: "MegaBlaziken", Goles: 2 },
-      { name: "Perrengiel", Goles: 2 },
-    ];
+    this.players = this.fbp.obtener_jugadores().valueChanges();
   }
 
   showPrompt() {
@@ -51,6 +50,13 @@ export class ListPage {
           text: 'Guardar',
           handler: data => {
             console.log('Saved clicked');
+            const data2 = {
+              name: data.Nombre,
+              Goles: 0,
+              team: this.fbp.team,
+              status: 1
+            };
+            this.fbp.crear_jugador(data2);
             console.log(JSON.stringify(data)); //to see the object
             console.log(data.Nombre);
             const toast = this.toastCtrl.create({

@@ -50,7 +50,7 @@
   </ion-row>
 </ion-grid>
 <ion-list>
-  <ion-item *ngFor="let player of players">
+  <ion-item *ngFor="let player of players | async">
     <ion-icon name="person" item-start large></ion-icon>
     <h2>{{player.name}}</h2>
     <p>Goles: {{player.Goles}}</p>

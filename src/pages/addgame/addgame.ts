@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ToastController, AlertController } from 'ionic-angular';
 
+import { FirebaseproviderProvider } from '../../providers/firebaseprovider/firebaseprovider'
+import { Observable } from 'rxjs/Observable';
 /**
  * Generated class for the AddgamePage page.
  *
@@ -18,8 +20,8 @@ export class AddgamePage {
   public team1 = null;
   public team2 = null;
   public Goles = [];
-  public players1 = [];
-  public players2 = [];
+  public players1: Observable<any[]>;
+  public players2: Observable<any[]>;
 
   public filter1 = [];
   public filter2 = [];
@@ -27,26 +29,18 @@ export class AddgamePage {
   public Goles1 = [];
   public Goles2 = [];
 
-  public teams = [];
+  public teams:Observable<any[]>;
 
-  constructor(public alertCtrl: AlertController, public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams) {
-    this.teams = [
-      {name:"DTD"},
-      {name:"Compas"},
-      {name:"Login"}
-    ];
-    this.players1 = [
-      {name:"Josu"},
-      {name: "Pedro"},
-      {name: "Jose"},
-      { name: "jerald" },
-    ];
-    this.players2 = [
-      { name: "luis" },
-      { name: "Pelos" },
-      { name: "Coos" },
-      { name: "Pul" },
-    ];
+  constructor(public fbp: FirebaseproviderProvider, public alertCtrl: AlertController, public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams) {
+    this.teams = this.fbp.obtener_equipos().valueChanges();
+  }
+
+  t1select(){
+    this.players1 = this.fbp.obtener_jugadores(this.team1).valueChanges();
+  }
+
+  t2select(){
+    this.players2 = this.fbp.obtener_jugadores(this.team2).valueChanges();
   }
 
   ionViewDidLoad() {
@@ -61,6 +55,28 @@ export class AddgamePage {
           text: 'Cancelar',
           handler: data => {
             console.log('Cancel clicked');
+            let g1 = 0;
+            let g2 = 0;
+            this.Goles1.forEach(value => {
+              g1 = g1 + value;
+            });
+            this.Goles2.forEach(value => {
+              g2 = g2 + value;
+            });
+            let p1 = [];
+            let p2 = [];
+            for (let i = 0; i < this.players1.length; i++) {
+              p1.push({name:this.players1[i], Goles: this.Goles1[i]})
+            }
+            for (let i = 0; i < this.players2.length; i++) {
+              p2.push({ name: this.players2[i], Goles: this.Goles2[i] })
+            }
+            const data2 = {
+              game: [
+                {name: this.team1, Goles: g1, jugadores:p1},
+                {name: this.team2, Goles: g2, jugadores:p2}
+              ]
+            }
           }
         },
         {

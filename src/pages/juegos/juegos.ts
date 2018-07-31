@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AddgamePage } from '../addgame/addgame';
+
+import { FirebaseproviderProvider } from '../../providers/firebaseprovider/firebaseprovider'
+import { Observable } from 'rxjs/Observable';
 /**
  * Generated class for the JuegosPage page.
  *
@@ -14,14 +17,15 @@ import { AddgamePage } from '../addgame/addgame';
   templateUrl: 'juegos.html',
 })
 export class JuegosPage {
-  public juegos = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.juegos = [
-      [{name:"DTD", Goles:3}, {name:"Compas", Goles:5}],
-      [{ name: "Compas", Goles: 4 }, { name: "Login", Goles: 2 }],
-      [{ name: "DTD", Goles: 1 }, { name: "XD", Goles: 3 }],
-      [{ name: "DTD", Goles: 2 }, { name: "Compas", Goles: 2 }]
-    ];
+  public juegos: Observable<any[]>;
+  constructor(public fbp: FirebaseproviderProvider, public navCtrl: NavController, public navParams: NavParams) {
+    this.juegos = fbp.obtener_juegos().valueChanges(); 
+    // = [
+    //   [{name:"DTD", Goles:3}, {name:"Compas", Goles:5}],
+    //   [{ name: "Compas", Goles: 4 }, { name: "Login", Goles: 2 }],
+    //   [{ name: "DTD", Goles: 1 }, { name: "XD", Goles: 3 }],
+    //   [{ name: "DTD", Goles: 2 }, { name: "Compas", Goles: 2 }]
+    // ];
   }
 
   goToOtherPage() {

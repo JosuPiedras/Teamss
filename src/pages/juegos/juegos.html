@@ -20,7 +20,7 @@
     </button>
   </ion-item>
   <ion-list>
-    <ion-item *ngFor="let juego of juegos;">
+    <ion-item *ngFor="let juego of juegos | async">
       <ion-grid>
         <ion-row style="text-align: center;">
           <h2 style="position: absolute;right: 47%;top: 35%;">VS<br><ion-icon name="football"></ion-icon></h2>

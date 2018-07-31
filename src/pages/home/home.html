@@ -11,7 +11,7 @@
 
 <ion-card *ngFor="let torneo of torneos | async">
     <ion-card-content>
-      <ion-card-title>{{torneo.Nombre}}</ion-card-title>
+      <ion-card-title [style.color]="fbp.torneo == torneo.Nombre ? 'green' : null ">{{torneo.Nombre}}<p style='color:green;' *ngIf="fbp.torneo == torneo.Nombre">(seleccionado)</p></ion-card-title>
        <p>Organizador:</p>
       <p>{{torneo.Organizador}}</p>
     </ion-card-content>
@@ -22,7 +22,7 @@
 
       </ion-col>
       <ion-col text-right>
-        <button ion-button clear small color="secondary" icon-start>
+        <button (click)="seleccionar_torneo(torneo.Nombre)" ion-button clear small color="secondary" icon-start>
           <ion-icon name='football'></ion-icon>
           Seleccionar Torneo
         </button>

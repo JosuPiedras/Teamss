@@ -15,7 +15,7 @@ export class HomePage {
 
   constructor(public fbp :FirebaseproviderProvider, public toastCtrl: ToastController, public alertCtrl: AlertController, public navCtrl: NavController) {
     this.torneos = this.fbp.obtener_torneos().valueChanges();
-    
+
   }
 
   showPrompt() {
@@ -58,4 +58,7 @@ export class HomePage {
     prompt.present();
   }
 
+  seleccionar_torneo(name){
+    this.fbp.seleccionar_torneo(name);
+  }
 }

@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ListPage } from '../list/list'
 import { AlertController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
+import { FirebaseproviderProvider } from '../../providers/firebaseprovider/firebaseprovider'
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Generated class for the TeamsPage page.
@@ -17,22 +19,19 @@ import { ToastController } from 'ionic-angular';
   templateUrl: 'teams.html',
 })
 export class TeamsPage {
-  public teams = [];
-  constructor(public toastCtrl: ToastController, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
-    this.teams = [
-      { name: "DTD", points: 5 },
-      { name: "Compas", points: 6 },
-      { name: "XD", points: 4 }
-    ]
+  public teams: Observable<any[]>;
+  constructor(public fbp:FirebaseproviderProvider, public toastCtrl: ToastController, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
+    this.teams = fbp.obtener_equipos().valueChanges();
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeamsPage');
   }
 
-  goToOtherPage() {
-    //push another page onto the history stack
-    //causing the nav controller to animate the new page in
+  goToOtherPage(data) {
+    this.fbp.seleccionar_equipo(data);
+    
     this.navCtrl.push(ListPage);
   }
 
@@ -59,6 +58,13 @@ export class TeamsPage {
             console.log('Saved clicked');
             console.log(JSON.stringify(data)); //to see the object
             console.log(data.Nombre);
+            const data2 = {
+              Name: data.Nombre,
+              torneo: this.fbp.torneo,
+              points: 0,
+              status: 1
+            };
+            this.fbp.crear_equipo(data2);
             const toast = this.toastCtrl.create({
               message: 'Equipo guardado!',
               duration: 3000
