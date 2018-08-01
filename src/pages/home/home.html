@@ -7,7 +7,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="Fondo">
 
 <ion-card *ngFor="let torneo of torneos | async">
     <ion-card-content>
@@ -16,7 +16,7 @@
       <p>{{torneo.Organizador}}</p>
     </ion-card-content>
 
-    <ion-row no-padding>
+    <ion-row no-padding class="Color">
 
       <ion-col text-center>
 
