@@ -24,13 +24,13 @@
       <ion-grid>
         <ion-row style="text-align: center;">
           <h2 style="position: absolute;right: 47%;top: 35%;">VS<br><ion-icon name="football"></ion-icon></h2>
-          <ion-col [style.color]="juego[0].Goles < juego[1].Goles ? 'darkred' : 'green' ">
-                  <h2>{{juego[0].name}}</h2>
-                  <p>{{juego[0].Goles}}</p>
+          <ion-col [style.color]="juego.game[0].Goles < juego.game[1].Goles ? 'darkred' : 'green' ">
+                  <h2>{{juego.game[0].name}}</h2>
+                  <p>{{juego.game[0].Goles}}</p>
           </ion-col>
-          <ion-col [style.color]="juego[0].Goles > juego[1].Goles ? 'darkred' : 'green' ">
-                  <h2>{{juego[1].name}}</h2>
-                  <p>{{juego[1].Goles}}</p>
+          <ion-col [style.color]="juego.game[0].Goles > juego.game[1].Goles ? 'darkred' : 'green' ">
+                  <h2>{{juego.game[1].name}}</h2>
+                  <p>{{juego.game[1].Goles}}</p>
           </ion-col>
         </ion-row>
       </ion-grid>

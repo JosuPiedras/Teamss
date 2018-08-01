@@ -55,38 +55,43 @@ export class AddgamePage {
           text: 'Cancelar',
           handler: data => {
             console.log('Cancel clicked');
-            let g1 = 0;
-            let g2 = 0;
-            this.Goles1.forEach(value => {
-              g1 = g1 + value;
-            });
-            this.Goles2.forEach(value => {
-              g2 = g2 + value;
-            });
-            let p1 = [];
-            let p2 = [];
-            for (let i = 0; i < this.players1.length; i++) {
-              p1.push({name:this.players1[i], Goles: this.Goles1[i]})
-            }
-            for (let i = 0; i < this.players2.length; i++) {
-              p2.push({ name: this.players2[i], Goles: this.Goles2[i] })
-            }
-            const data2 = {
-              game: [
-                {name: this.team1, Goles: g1, jugadores:p1},
-                {name: this.team2, Goles: g2, jugadores:p2}
-              ]
-            }
           }
         },
         {
           text: 'Guardar',
           handler: data => {
+            let g1 = 0;
+            let g2 = 0;
+            this.Goles1.forEach(value => {
+              g1 = g1 + Number(value);
+            });
+            this.Goles2.forEach(value => {
+              g2 = g2 + Number(value);
+            });
+            let p1 = [];
+            let p2 = [];
+            for (let i = 0; i < this.filter1.length; i++) {
+              p1.push({ name: this.filter1[i], Goles: this.Goles1[i] })
+            }
+            for (let i = 0; i < this.filter2.length; i++) {
+              p2.push({ name: this.filter2[i], Goles: this.Goles2[i] })
+            }
+            const data2 = {
+              game: [
+                { name: this.team1, Goles: g1, jugadores: p1 },
+                { name: this.team2, Goles: g2, jugadores: p2 }
+              ],
+              torneo: this.fbp.torneo,
+              status: 1
+            }
+
+            this.fbp.crear_juego(data2);
             const toast = this.toastCtrl.create({
               message: 'Juego guardado!',
               duration: 3000
             });
             toast.present();
+            this.navCtrl.pop();
           }
         }
       ]

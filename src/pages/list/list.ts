@@ -17,7 +17,7 @@ export class ListPage {
   constructor(public fbp: FirebaseproviderProvider, public toastCtrl: ToastController, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
     // If we navigated to this page, we will have an item available as a nav param
     this.team = {
-      name:fbp.team,
+      name:this.navParams.get('team'),
       partidos: 0,
       ganados: 0,
       empatados: 0,
@@ -53,7 +53,7 @@ export class ListPage {
             const data2 = {
               name: data.Nombre,
               Goles: 0,
-              team: this.fbp.team,
+              team: this.navParams.get('team'),
               status: 1
             };
             this.fbp.crear_jugador(data2);

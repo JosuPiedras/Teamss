@@ -60,4 +60,9 @@ export class FirebaseproviderProvider {
     return items;
   }
 
+  crear_juego(data){
+    const items = this.afDB.list('juegos');
+    items.push(data);
+  }
+
 }

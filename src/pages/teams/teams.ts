@@ -32,7 +32,7 @@ export class TeamsPage {
   goToOtherPage(data) {
     this.fbp.seleccionar_equipo(data);
     
-    this.navCtrl.push(ListPage);
+    this.navCtrl.push(ListPage, { team: data});
   }
 
   showPrompt() {
