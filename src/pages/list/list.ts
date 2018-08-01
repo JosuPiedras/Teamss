@@ -16,9 +16,6 @@ export class ListPage {
   public players: Observable<any[]>;
   constructor(public fbp: FirebaseproviderProvider, public toastCtrl: ToastController, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
     // If we navigated to this page, we will have an item available as a nav param
-    
-  }
-  ionViewWillEnter() {
     this.team = {
       name: this.navParams.get('team'),
       partidos: 0,
@@ -60,6 +57,9 @@ export class ListPage {
       this.team.points = this.team.ganados * 3 + this.team.empatados;
     });
     this.players = this.fbp.obtener_jugadores().valueChanges();
+  }
+  ionViewWillEnter() {
+    
   }
   showPrompt() {
     const prompt = this.alertCtrl.create({

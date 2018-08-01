@@ -32,7 +32,7 @@ export class AddgamePage {
   public teams:Observable<any[]>;
 
   constructor(public fbp: FirebaseproviderProvider, public alertCtrl: AlertController, public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams) {
-    this.teams = this.fbp.obtener_equipos().valueChanges();
+    
   }
 
   t1select(){
@@ -42,7 +42,9 @@ export class AddgamePage {
   t2select(){
     this.players2 = this.fbp.obtener_jugadores(this.team2).valueChanges();
   }
-
+  ionViewWillEnter() {
+    this.teams = this.fbp.obtener_equipos().valueChanges();
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddgamePage');
   }
