@@ -19,7 +19,7 @@ import { Observable } from 'rxjs/Observable';
 export class JuegosPage {
   public juegos: Observable<any[]>;
   constructor(public fbp: FirebaseproviderProvider, public navCtrl: NavController, public navParams: NavParams) {
-    this.juegos = fbp.obtener_juegos().valueChanges(); 
+    
     // = [
     //   [{name:"DTD", Goles:3}, {name:"Compas", Goles:5}],
     //   [{ name: "Compas", Goles: 4 }, { name: "Login", Goles: 2 }],
@@ -28,6 +28,9 @@ export class JuegosPage {
     // ];
   }
 
+  ionViewWillEnter() {
+    this.juegos = this.fbp.obtener_juegos().valueChanges(); 
+  }
   goToOtherPage() {
     //push another page onto the history stack
     //causing the nav controller to animate the new page in

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { FirebaseproviderProvider } from '../../providers/firebaseprovider/firebaseprovider'
+import { Observable } from 'rxjs/Observable';
 /**
  * Generated class for the GoleadoresPage page.
  *
@@ -14,21 +16,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'goleadores.html',
 })
 export class GoleadoresPage {
+  public best = 0;
   public players = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.players = [
-      {name:"Josu Rocas", team:"DTD Mancos", goles:5},
-      { name: "Perrengiel", team: "DTD Mancos", goles: 4 },
-      { name: "Mega Blaziken", team: "DTD Mancos", goles: 4 },
-      { name: "Agrippa", team: "Compas", goles: 6 },
-      { name: "Relleno 1", team: "XD", goles: 1 },
-      { name: "Relleno 2", team: "Login", goles: 2 },
-      { name: "AAA", team: "Compas", goles: 6 },
-      { name: "Caditos", team: "Compas", goles: 3 },
-      { name: "Relleno 3", team: "DTD Mancos", goles: 1 }
-    ]
+  constructor(public fbp: FirebaseproviderProvider, public navCtrl: NavController, public navParams: NavParams) {
+    
   }
-
+  ionViewWillEnter() {
+    this.fbp.obtener_goleadores().valueChanges().subscribe(
+      valu => {
+        this.players = valu;
+        this.players.sort(function (a, b) { return (a.Goles < b.Goles) ? 1 : ((b.Goles < a.Goles) ? -1 : 0); });
+      }
+    );
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad GoleadoresPage');
   }

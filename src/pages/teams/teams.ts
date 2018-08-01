@@ -21,8 +21,10 @@ import { Observable } from 'rxjs/Observable';
 export class TeamsPage {
   public teams: Observable<any[]>;
   constructor(public fbp:FirebaseproviderProvider, public toastCtrl: ToastController, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
-    this.teams = fbp.obtener_equipos().valueChanges();
 
+  }
+  ionViewWillEnter() {
+    this.teams = this.fbp.obtener_equipos().valueChanges();
   }
 
   ionViewDidLoad() {

@@ -14,8 +14,11 @@ export class HomePage {
   public torneos:Observable<any[]>;
 
   constructor(public fbp :FirebaseproviderProvider, public toastCtrl: ToastController, public alertCtrl: AlertController, public navCtrl: NavController) {
-    this.torneos = this.fbp.obtener_torneos().valueChanges();
+    
 
+  }
+  ionViewWillEnter() {
+    this.torneos = this.fbp.obtener_torneos().valueChanges();
   }
 
   showPrompt() {

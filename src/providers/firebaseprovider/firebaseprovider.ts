@@ -39,7 +39,8 @@ export class FirebaseproviderProvider {
   }
 
   detalle_team(){
-
+    const items = this.afDB.list('juegos', ref => ref.orderByChild('torneo').equalTo(this.torneo));
+    return items;
   }
 
   obtener_jugadores(data=false) {
@@ -52,6 +53,7 @@ export class FirebaseproviderProvider {
 
   crear_jugador(data){
     const items = this.afDB.list('jugadores');
+    data.torneo = this.torneo;
     items.push(data);
   }
 
@@ -62,7 +64,28 @@ export class FirebaseproviderProvider {
 
   crear_juego(data){
     const items = this.afDB.list('juegos');
+    for (let j = 0; j < 2; j++) {
+      for (let i = 0; i < data.game[j].jugadores.length; i++) {
+        let named = [];
+        this.afDB.list('jugadores', ref => ref.orderByChild('name').equalTo(data.game[j].jugadores[i].name)).snapshotChanges().subscribe(snap => {
+          named = snap;
+          named.forEach(value => {
+            if (value.payload.val().torneo == this.torneo) {
+              const b = this.afDB.list('jugadores');
+              const c = value.payload.val();
+              c.Goles = Number(c.Goles) + Number(data.game[j].jugadores[i].Goles);
+              b.update(value.payload.key, c);
+            }
+          });
+        });
+      }
+    }
     items.push(data);
+  }
+
+  obtener_goleadores(){
+    const items = this.afDB.list('jugadores', ref => ref.orderByChild('torneo').equalTo(this.torneo));
+    return items;
   }
 
 }

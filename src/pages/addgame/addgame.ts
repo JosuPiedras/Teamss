@@ -71,11 +71,17 @@ export class AddgamePage {
             let p1 = [];
             let p2 = [];
             for (let i = 0; i < this.filter1.length; i++) {
-              p1.push({ name: this.filter1[i], Goles: this.Goles1[i] })
+              p1.push({ name: this.filter1[i], Goles: Number(this.Goles1[i]) })
             }
             for (let i = 0; i < this.filter2.length; i++) {
-              p2.push({ name: this.filter2[i], Goles: this.Goles2[i] })
+              p2.push({ name: this.filter2[i], Goles: Number(this.Goles2[i]) })
             }
+            if (p1.length == 0){
+              p1.push({name: ".", Goles: 0});
+            }
+            if (p2.length == 0) {
+              p2.push({ name: ".", Goles: 0 });
+            } 
             const data2 = {
               game: [
                 { name: this.team1, Goles: g1, jugadores: p1 },
